@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <algorithm>
+using namespace std;
+
+struct Person {
+    string name;
+    int age;
+    float degreeA;
+    float degreeB;
+    float unionDegree;
+    float intersectionDegree;
+    float complementA;
+    float complementB;
+};
+
+// Membership function A
+float membershipA(int age) {
+    if (age <= 20) return 1.0;
+    else if (age > 20 && age <= 30) return (30.0 - age) / 10.0;
+    else return 0.0;
+}
+
+// Membership function B
+float membershipB(int age) {
+    if (age <= 15) return 1.0;
+    else if (age > 15 && age <= 35) return (35.0 - age) / 20.0;
+    else return 0.0;
+}
+
+int main() {
+    const int SIZE = 5;
+    Person people[SIZE];
+
+    // Input
+    for (int i = 0; i < SIZE; i++) {
+        cout << "Enter name of person " << i + 1 << ": ";
+        cin >> people[i].name;
+        cout << "Enter age of " << people[i].name << ": ";
+        cin >> people[i].age;
+
+        // Calculate membership degrees
+        people[i].degreeA = membershipA(people[i].age);
+        people[i].degreeB = membershipB(people[i].age);
+
+        // Set operations
+        people[i].unionDegree = max(people[i].degreeA, people[i].degreeB);
+        people[i].intersectionDegree = min(people[i].degreeA, people[i].degreeB);
+        people[i].complementA = 1.0 - people[i].degreeA;
+        people[i].complementB = 1.0 - people[i].degreeB;
+    }
+
+    // Output
+    cout << fixed << setprecision(2);
+    cout << "\nName\tAge\tA(x)\tB(x)\tUnion\tIntersec\t¬A\t¬B\n";
+    for (int i = 0; i < SIZE; i++) {
+        cout << people[i].name << "\t"
+             << people[i].age << "\t"
+             << people[i].degreeA << "\t"
+             << people[i].degreeB << "\t"
+             << people[i].unionDegree << "\t"
+             << people[i].intersectionDegree << "\t\t"
+             << people[i].complementA << "\t"
+             << people[i].complementB << "\n";
+    }
+
+    return 0;
+}
