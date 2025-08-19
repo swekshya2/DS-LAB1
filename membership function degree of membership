@@ -53,7 +53,7 @@ int main() {
 
     // Output
     cout << fixed << setprecision(2);
-    cout << "\nName\tAge\tA(x)\tB(x)\tUnion\tIntersec\t¬A\t¬B\n";
+    cout << "\nName\tAge\tA(x)\tB(x)\tUnion\tIntersec\tÂ¬A\tÂ¬B\n";
     for (int i = 0; i < SIZE; i++) {
         cout << people[i].name << "\t"
              << people[i].age << "\t"
